@@ -1,0 +1,14 @@
+This is an example of program written in Matlab to fit experimental data with a chemical kinetic model.
+The code served as a basis for the published paper that can be found here : DOI: 10.1021/acs.jpclett.5b01478 
+The experimental data consisted in a series of Small-Angle X-Ray Scattering (SAXS) patterns of disassembly of viral proteins that were collected as a function of time (kinetics).
+
+The program can be run with  the file ‘main.m’.
+It reads as follows:
+- Loading experimental data, quick preprocessing.
+- the kinetic model is pre-established. In this case, it is a 4-state kinetic model (a total of 4 species is considered). The model can be found in the published paper and is transcripted in the code ‘ode_FOUR_state_disass_model.m’ in terms of ordinary differential equations. The matlab function ode15s is used to resolve stiff differential equations. Here, we fix stochiometric coefficient.
+- others physical parameters are fixed
+- a Singular Value Decomposition (SVD) analysis is performed.
+- The signatures of the 4 species (called form factors) have been previously extracted. Those are fixed here.
+- Other stochiometric coefficients are fixed
+- Global Fitting: it consists in finding the optimal parameters (here the rate constants) that best fit the dataset, that is to say where the loss function Chi-square is minimum (goodness of fit). The algorithm used is a non-linear constrained optimisation algorithm: ‘fmincon’ with ‘sqp’ option (sequential quadratic programming)
+- Once the optimal parameters have been found, the figures of merit Chi-square and R-factor are computed. The parameters are saved .
